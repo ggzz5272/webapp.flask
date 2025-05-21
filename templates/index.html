@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <title>간단 주소록</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>주소록</h1>
+    <form id="addressForm" action="/upload" method="POST" enctype="multipart/form-data">
+        <label for="name">이름</label>
+        <input type="text" id="name" name="name" required />
+
+        <label for="birth">생년월일</label>
+        <input type="date" id="birth" name="birth" required />
+
+        <label for="phone">전화번호</label>
+        <input type="tel" id="phone" name="phone" required pattern="[0-9\-]+" placeholder="숫자와 - 만 입력 가능" />
+
+        <label for="photo">사진</label>
+        <input type="file" id="photo" name="photo" accept="image/*" required />
+        <img id="photoPreview" src="#" alt="사진 미리보기" style="display:none; max-width:200px; max-height:200px;" />
+
+        <button type="submit">저장</button>
+    </form>
+
+    <table id="addressList" style="display:none;">
+        <thead>
+            <tr>
+                <th>이름</th>
+                <th>생년월일</th>
+                <th>전화번호</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <h1>웹캠 촬영</h1>
+    <video id="webcam" autoplay playsinline width="640" height="480"></video>
+    <canvas id="canvas" style="display: none;"></canvas>
+    <button id="captureButton">촬영</button>
+
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+</body>
+</html>
