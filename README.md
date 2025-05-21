@@ -4,4 +4,5 @@
 3. app.py, index.html 생성후 코드넣기
 4. 실행(python app.py)
 ![이미지](1.png)
+브라우저에서 http://127.0.0.1:5000 들어가기
 ![이미지](2.png)
