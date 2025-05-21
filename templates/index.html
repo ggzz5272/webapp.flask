@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <title>간단 주소록</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 20px auto; }
+        label { display: block; margin-top: 10px; }
+        input { width: 100%; padding: 8px; margin-top: 5px; box-sizing: border-box; }
+        button { margin-top: 15px; padding: 10px 20px; }
+        table { margin-top: 20px; width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background-color: #f4f4f4; }
+    </style>
+</head>
+<body>
+    <h1>주소록</h1>
+    <form id="addressForm">
+        <label for="name">이름</label>
+        <input type="text" id="name" name="name" required />
+
+        <label for="birth">생년월일</label>
+        <input type="date" id="birth" name="birth" required />
+
+        <label for="phone">전화번호</label>
+        <input type="tel" id="phone" name="phone" required pattern="[0-9\-]+" placeholder="숫자와 - 만 입력 가능" />
+
+        <button type="submit">저장</button>
+    </form>
+
+    <table id="addressList" style="display:none;">
+        <thead>
+            <tr>
+                <th>이름</th>
+                <th>생년월일</th>
+                <th>전화번호</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <script>
+        const form = document.getElementById('addressForm');
+        const table = document.getElementById('addressList');
+        const tbody = table.querySelector('tbody');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();  // 폼 제출 막기
+
+            const name = form.name.value.trim();
+            const birth = form.birth.value;
+            const phone = form.phone.value.trim();
+
+            // 간단 검증 (필요하면 더 추가 가능)
+            if (!name || !birth || !phone) {
+                alert('모든 항목을 입력해주세요.');
+                return;
+            }
+
+            // 테이블 보이게 하기
+            table.style.display = 'table';
+
+            // 새 행 추가
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${name}</td>
+                <td>${birth}</td>
+                <td>${phone}</td>
+            `;
+            tbody.appendChild(tr);
+
+            // 폼 초기화
+            form.reset();
+        });
+    </script>
+</body>
+</html>
